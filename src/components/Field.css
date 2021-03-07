@@ -1,0 +1,56 @@
+
+
+.cell{
+    height: 100px;
+    width: 100px;
+    display: inline-block;
+    transition-duration: 0.1s;
+    transition-timing-function: linear
+}
+
+.cellValue0{
+    background-color: rgb(205,193,180);
+}
+
+.cellValue2{
+    background-color: rgb(238,228,218);
+}
+
+.cellValue4{
+    background-color: rgb(238,225,201);
+}
+
+.cellValue8{
+    background-color: rgb(243,178,122);
+}
+
+.cellValue16{
+    background-color: rgb(246,150,100);
+}
+
+.cellValue32{
+    background-color: rgb(247,124,95);
+}
+
+.cellValue64{
+    background-color: rgb(247,95,59);
+}
+
+.cellValue128{
+    background-color: rgb(237,208,115);
+}
+.cellValue256{
+    background-color: rgb(175, 86, 2);
+}
+.cellValue512{
+    background-color: rgb(224, 203, 166);
+}
+.cellValue1024{
+    background-color: rgb(234, 239, 75);
+}
+.cellValue2048{
+    background-color: rgb(255, 174, 7);
+}
+.cellValue4096{
+    background-color: rgb(255, 0, 0);
+}
