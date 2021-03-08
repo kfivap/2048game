@@ -23,11 +23,14 @@ const context = useContext(GameContext)
 
 
     return(
+        <>
+            <h1>{context.lastAction}</h1>
         <div className='mt-5 gameGrid'>
             <div>{rowGenerator(0)}</div>
             <div>{rowGenerator(1)}</div>
             <div>{rowGenerator(2)}</div>
             <div>{rowGenerator(3)}</div>
         </div>
+            </>
     )
 }

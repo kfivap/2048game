@@ -1,4 +1,4 @@
-import React, {useContext, useEffect, useRef, useState} from "react";
+import React, {useContext, useEffect, useMemo, useRef, useState} from "react";
 import {Field} from "./Field";
 import {GameContext} from "../GameContext";
 
@@ -15,7 +15,7 @@ function mover(num1, num2) {
 }
 
 function RandomFill() {
-if(Math.random()<0.05){
+if(Math.random()<0.8){
     return 2
 }
 else {return 0}
@@ -28,16 +28,17 @@ export const Game = (props) => {
 
 
 
-  const handleKeyDown= (event)=> {
+
+
+
+    function handleKeyDown(event) {
+
 
 
         const fl = [...context.gameField]
 
-
-
-
         if(event.key === 'ArrowUp'){
-            console.log(event.key)
+            // console.log(event.key)
 
             for (let j=0; j<4; j++) {
 
@@ -95,13 +96,11 @@ export const Game = (props) => {
 
             }
 
-            context.setGameField(fl)
-            context.setTest(prevState => prevState+1)
 
         }
 
         if(event.key === 'ArrowDown'){
-            console.log(event.key)
+            // console.log(event.key)
             for (let j=0; j<4; j++) {
 
                 for (let i = 0; i < 2; i++) {
@@ -165,12 +164,10 @@ export const Game = (props) => {
 
             }
 
-            context.setGameField(fl)
-            context.setTest(prevState => prevState+1)
         }
 
         if(event.key === 'ArrowLeft'){
-            console.log(event.key)
+            // console.log(event.key)
 
             for (let j=0; j<4; j++) {
 
@@ -228,27 +225,33 @@ export const Game = (props) => {
 
             }
 
-            context.setGameField(fl)
-            context.setTest(prevState => prevState+1)
+
+
 
         }
 
         if(event.key === 'ArrowRight'){
-            console.log(event.key)
+            // console.log(event.key)
+
+            let count = 0
+
             for (let j=0; j<4; j++) {
 
                 for (let i = 0; i < 2; i++) {
-                    if (fl[j][3] === 0) {
+                    if (fl[j][3] === 0 &&fl[j][2]!==0) {
                         fl[j][3] = fl[j][2]
                         fl[j][2] = 0
+                        count=count+1
                     }
-                    if (fl[j][2] === 0) {
+                    if (fl[j][2] === 0 &&fl[j][1]!==0) {
                         fl[j][2] = fl[j][1]
                         fl[j][1] = 0
+                        count=count+1
                     }
-                    if (fl[j][1] === 0) {
+                    if (fl[j][1] === 0 &&fl[j][0]!==0) {
                         fl[j][1] = fl[j][0]
                         fl[j][0] = 0
+                        count=count+1
                     }
 
                 }
@@ -273,34 +276,65 @@ export const Game = (props) => {
                 for (let i = 0; i < 2; i++) {
                     if (fl[j][3] === 0) {
                         fl[j][3] = fl[j][2]
-                        fl[j][2] = RandomFill()
+                        fl[j][2] = 0
                     }
                     if (fl[j][2] === 0) {
                         fl[j][2] = fl[j][1]
-                        fl[j][1] = RandomFill()
+                        fl[j][1] = 0
                     }
                     if (fl[j][1] === 0) {
                         fl[j][1] = fl[j][0]
-                        fl[j][0] = RandomFill()
+                        fl[j][0] = 0
                     }
 
                 }
+
+                for (let i = 0; i < 2; i++) {
+                    if (fl[j][3] === 0 &&fl[j][2]!==0) {
+                        fl[j][3] = fl[j][2]
+                        fl[j][2] = RandomFill()
+                        count=count+1
+                    }
+                    if (fl[j][2] === 0 &&fl[j][1]!==0) {
+                        fl[j][2] = fl[j][1]
+                        fl[j][1] = RandomFill()
+                        count=count+1
+                    }
+                    if (fl[j][1] === 0 &&fl[j][0]!==0) {
+                        fl[j][1] = fl[j][0]
+                        fl[j][0] = RandomFill()
+                        count=count+1
+                    }
+
+                }
+
+                console.log(count)
+                // //filler
+                // for(let i=0; i<4; i++){
+                //     if(fl[i][j]===0){
+                //         fl[i][j]=RandomFill()
+                //     }
+                // }
 
 
 
 
             }
 
-            context.setGameField(fl)
-            context.setTest(prevState => prevState+1)
+
         }
 
+        context.setGameField(fl)
     }
+//сделать проверку ходов
 
 useEffect(()=>{
-    window.addEventListener('keydown', handleKeyDown)}, [])
-
-
+    window.addEventListener('keydown', (e)=>{
+        handleKeyDown(e)
+    // context.setLastAction(564)
+    })
+    }
+    , [])
 
 
     return(<div
