@@ -33,7 +33,9 @@ export const GameOver = ()=>{
         </div>)
     }
     else{
-        return null
+        return (<div>
+            <button className='btn btn-outline-warning btn-lg m-2' onClick={clickHandler}>reset!</button>
+        </div>)
     }
 
 

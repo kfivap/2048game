@@ -13,7 +13,7 @@ function Rnd() {
 export const GameProvider = ({children}) => {
 
     const [score, setScore] = useState(parseInt(localStorage.getItem('2048score')))
-    const [gameOver, setGameOver] = useState(true)
+    const [gameOver, setGameOver] = useState(false)
 
 
     const initialField = [
