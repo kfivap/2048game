@@ -26,6 +26,7 @@ export const GameOver = ()=>{
         // window.location.reload();
     }
 
+
     if(context.gameOver){
         return(<div>
             <h1>Game Over</h1>
@@ -34,7 +35,7 @@ export const GameOver = ()=>{
     }
     else{
         return (<div>
-            <button className='btn btn-outline-warning btn-lg m-2' onClick={clickHandler}>reset!</button>
+            <button className='btn btn-outline-warning btn-sm m-5' onClick={clickHandler}>reset</button>
         </div>)
     }
 
