@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from 'react'
-import {GameContext} from "../GameContext";
+import './Github.css'
 import './Field.css'
 
 export const GitHub = ()=>{
