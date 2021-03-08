@@ -8,7 +8,7 @@ export const GameOver = ()=>{
     const context = useContext(GameContext)
 
     const clickHandler = ()=>{
-        context.setGameField(context.initialField)
+        // context.setGameField(context.initialField)
         context.setScore(0)
         context.setGameOver(false)
         window.location.reload();

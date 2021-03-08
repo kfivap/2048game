@@ -31,14 +31,14 @@ function RandomFill(fl) {
     while (!filled){
         let a =Math.floor(Math.random() * 4);
         let b =Math.floor(Math.random() * 4);
-            if (fl[a][b] === 0) {
-                fl[a][b] = 2
-                filled = true
-                break
-            }
+        if (fl[a][b] === 0) {
+            fl[a][b] = 2
+            filled = true
+            break
         }
+    }
 
-      //  console.log(fl)
+    //  console.log(fl)
 
     return fl
 
@@ -51,6 +51,15 @@ let possibleMoves = [true, true, true, true] //up down left right
 export const Game = (props) => {
 
     const context = useContext(GameContext)
+
+
+
+
+
+
+
+
+
 
 
 
@@ -104,14 +113,15 @@ export const Game = (props) => {
     };
 
     const myref = useRef()
-
+    // document.addEventListener('touchstart', handleTouchStart, false);
+    // document.addEventListener('touchmove', handleTouchMove, false);
 
 
 
     function handleKeyDown(event) {
 
 
-        let fl = context.gameField
+        const fl = [...context.gameField]
 
         if (event.key === 'ArrowUp') {
             // console.log(event.key)
@@ -425,56 +435,37 @@ export const Game = (props) => {
             }
             if (count > 0) {
                 RandomFill(fl)
-             //   console.log(fl)
+                //   console.log(fl)
                 possibleMoves.fill(true)
             }
             if (count ===0){
                 possibleMoves[3] =false
             }
             count = 0
-
         }
 
         //console.log(possibleMoves)
-if (possibleMoves.every(elem => !elem)){
-    context.setGameOver(true)
-    possibleMoves.fill(true)
-    context.setGameField(context.initialField)
+        if (possibleMoves.every(elem => !elem)){
+            context.setGameOver(true)
+        }
 
-}
 
         context.setGameField(fl)
-
-
-        git init
-        git add README.md
-        git commit -m "first commit"
-        git branch -M main
-
     }
 
 
 
+
     useEffect(() => {
+            window.addEventListener('keydown', (e) => {
+                handleKeyDown(e)
 
+            })
 
+            setTimeout( ()=>{
+                myref.current.addEventListener('touchstart', handleTouchStart, false);
+                myref.current.addEventListener('touchmove', handleTouchMove, false);},0)
 
-
-            setTimeout( ()=> {
-                window.addEventListener('keydown', (e) => {
-                    handleKeyDown(e)
-
-                })
-
-                setTimeout(() => {
-                    myref.current.addEventListener('touchstart', handleTouchStart, false);
-                    myref.current.addEventListener('touchmove', handleTouchMove, false);
-                    myref.current.focus()
-                }, 0)
-
-            },0)
-
-        // st(prevState => prevState+1)
 
         }
         , [])
@@ -485,12 +476,11 @@ if (possibleMoves.every(elem => !elem)){
 
         <h1>game</h1>
         <Score/>
-
         <div ref={myref}>
-        <Field  />
-    </div>
-<GameOver/>
- <GitHub/>
+            <Field/>
+        </div>
+        <GameOver/>
+        <GitHub/>
 
     </div>)
 }
