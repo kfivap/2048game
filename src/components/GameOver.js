@@ -11,6 +11,7 @@ export const GameOver = ()=>{
         context.setGameField(context.initialField)
         context.setScore(0)
         context.setGameOver(false)
+        window.location.reload();
     }
 
     if(context.gameOver){

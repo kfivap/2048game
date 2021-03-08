@@ -16,18 +16,19 @@ export const GameProvider = ({children}) => {
     const [gameOver, setGameOver] = useState(false)
 
     //
-    const initialField = [
-        [Rnd(),Rnd(),Rnd(),Rnd()],
-        [Rnd(),Rnd(),Rnd(),Rnd()],
-        [Rnd(),Rnd(),Rnd(),Rnd()],
-        [Rnd(),Rnd(),Rnd(),Rnd()]  ]
+    // const initialField = [
+    //     [Rnd(),Rnd(),Rnd(),Rnd()],
+    //     [Rnd(),Rnd(),Rnd(),Rnd()],
+    //     [Rnd(),Rnd(),Rnd(),Rnd()],
+    //     [Rnd(),Rnd(),Rnd(),Rnd()]  ]
 
-  //   const initialField = [
-  //       [8192,8192,8192,8192],
-  //       [8192,8192,8192,8192],        [8192,8192,8192,8192],
-  //       [8192,8192,8192,8192],
-  //
-  // ]
+    const initialField = [
+        [4,4,4,4],
+        [2048,512,1024,512],
+        [256,1024,512,256],
+        [2048,512,1024,512],
+
+  ]
 
     const [gameField, setGameField] = useState(
         initialField
@@ -43,9 +44,7 @@ export const GameProvider = ({children}) => {
             localStorage.setItem('2048maxScore', score)
         }
 
-
 console.log(locSt)
-
            // localStorage.setItem('maxScore', score)
         }
     }, [gameOver])

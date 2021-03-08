@@ -3,6 +3,7 @@ import {Field} from "./Field";
 import {GameContext} from "../GameContext";
 import {Score} from "./Score";
 import {GameOver} from "./GameOver";
+import {GitHub} from "./GitHub";
 
 
 function mover(num1, num2) {
@@ -50,15 +51,6 @@ let possibleMoves = [true, true, true, true] //up down left right
 export const Game = (props) => {
 
     const context = useContext(GameContext)
-
-
-
-
-
-
-
-
-
 
 
 
@@ -112,15 +104,14 @@ export const Game = (props) => {
     };
 
     const myref = useRef()
-    // document.addEventListener('touchstart', handleTouchStart, false);
-    // document.addEventListener('touchmove', handleTouchMove, false);
+
 
 
 
     function handleKeyDown(event) {
 
 
-        const fl = [...context.gameField]
+        let fl = context.gameField
 
         if (event.key === 'ArrowUp') {
             // console.log(event.key)
@@ -441,30 +432,45 @@ export const Game = (props) => {
                 possibleMoves[3] =false
             }
             count = 0
+
         }
 
         //console.log(possibleMoves)
 if (possibleMoves.every(elem => !elem)){
     context.setGameOver(true)
+    possibleMoves.fill(true)
+    context.setGameField(context.initialField)
+
 }
 
-
         context.setGameField(fl)
+
+
+
     }
 
 
 
-
     useEffect(() => {
-            window.addEventListener('keydown', (e) => {
-                handleKeyDown(e)
 
-            })
 
-setTimeout( ()=>{
-    myref.current.addEventListener('touchstart', handleTouchStart, false);
-    myref.current.addEventListener('touchmove', handleTouchMove, false);},0)
 
+
+            setTimeout( ()=> {
+                window.addEventListener('keydown', (e) => {
+                    handleKeyDown(e)
+
+                })
+
+                setTimeout(() => {
+                    myref.current.addEventListener('touchstart', handleTouchStart, false);
+                    myref.current.addEventListener('touchmove', handleTouchMove, false);
+                    myref.current.focus()
+                }, 0)
+
+            },0)
+
+        // st(prevState => prevState+1)
 
         }
         , [])
@@ -475,10 +481,12 @@ setTimeout( ()=>{
 
         <h1>game</h1>
         <Score/>
+
         <div ref={myref}>
-        <Field/>
+        <Field  />
     </div>
 <GameOver/>
+ <GitHub/>
 
     </div>)
 }

@@ -9,6 +9,17 @@ export const Score = ()=>{
 
     const maxScore = localStorage.getItem('2048maxScore')
 
+    useEffect(()=>{
+        let locSt = parseInt(localStorage.getItem('2048maxScore'))
+                if(!locSt){
+                    localStorage.setItem('2048maxScore', context.score)
+                }
+                if(locSt<context.score) {
+                    localStorage.setItem('2048maxScore', context.score)
+                }
+
+            },[context.score])
+
     return(<div>
 
         <h2>current <span className="badge bg-light text-dark">{context.score}</span></h2>
