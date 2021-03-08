@@ -113,15 +113,20 @@ export const Game = (props) => {
     };
 
     const myref = useRef()
-    // document.addEventListener('touchstart', handleTouchStart, false);
-    // document.addEventListener('touchmove', handleTouchMove, false);
 
 
+    function localStorageParser(){
+        let grid = localStorage.getItem('grid')
+        grid = grid.split(',')
+        grid=grid.map(element => parseInt(element))
 
+        return [grid.slice(0,4), grid.slice(4,8), grid.slice(8,12), grid.slice(12,16)]
+
+    }
     function handleKeyDown(event) {
 
 
-        const fl = [...context.gameField]
+        const fl = localStorageParser()
 
         if (event.key === 'ArrowUp') {
             // console.log(event.key)
@@ -449,8 +454,10 @@ export const Game = (props) => {
             context.setGameOver(true)
         }
 
+// localStorage.setItem('grid', fl)
+         context.setGameField(fl)
 
-        context.setGameField(fl)
+        // localStorage.setItem('grid', fl)
     }
 
 

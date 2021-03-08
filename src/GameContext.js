@@ -12,8 +12,8 @@ function Rnd() {
 
 export const GameProvider = ({children}) => {
 
-    const [score, setScore] = useState(0)
-    const [gameOver, setGameOver] = useState(false)
+    const [score, setScore] = useState(parseInt(localStorage.getItem('2048score')))
+    const [gameOver, setGameOver] = useState(true)
 
 
     const initialField = [
@@ -30,13 +30,12 @@ export const GameProvider = ({children}) => {
   //
   // ]
 
-    const [gameField, setGameField] = useState(
-        initialField
-    )
+
 
     useEffect(()=>{
         if(gameOver){
             let locSt = parseInt(localStorage.getItem('2048maxScore'))
+             localStorage.setItem(('grid'), initialField)
             if(!locSt){
                 localStorage.setItem('2048maxScore', score)
             }
@@ -51,13 +50,44 @@ export const GameProvider = ({children}) => {
 
 
 
+if (!localStorage.getItem(('grid'))){
+    localStorage.setItem(('grid'), initialField)
+}
+    const [gameField, setGameField] = useState(
+        localStorageParser()
+    )
+    function localStorageParser(){
+        let grid = localStorage.getItem('grid')
+        grid = grid.split(',')
+        grid=grid.map(element => parseInt(element))
+
+        return [grid.slice(0,4), grid.slice(4,8), grid.slice(8,12), grid.slice(12,16)]
+
+    }
+
+    const [localField, setLocalField] = useState(localStorageParser())
+
+
+    useEffect(()=>{
+
+
+        setTimeout(()=>{
+            setLocalField([localStorageParser()]
+            )
+            localStorage.setItem('grid', gameField)
+        }, 0)
+
+
+
+    }, [gameField])
 
     return(        <GameContext.Provider value={{
 
         gameField,setGameField,
         score, setScore,
         gameOver, setGameOver,
-        initialField
+        initialField,
+        localField, setLocalField
 
 
     }}>

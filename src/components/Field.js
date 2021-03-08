@@ -22,16 +22,20 @@ const context = useContext(GameContext)
 
 
     function rowGenerator(num) {
-        const rw = context.gameField[num].map((number, index) => {
-            //  `cellValue${number}`
-            return (
-                <div className={`cell cellValue${number}`} key={`row${num}_${index}`}>{number}
 
-                </div>)
-        })
-        return rw
+            const rw = context.gameField[num].map((number, index) => {
+                //  `cellValue${number}`
+                return (
+                    <div className={`cell cellValue${number}`} key={`row${num}_${index}`}>{number}
+
+                    </div>)
+            })
+            return rw
+
     }
 
+    // console.log(context.localField)
+    // console.log(context.gameField)
 
 
     return(

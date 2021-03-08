@@ -10,6 +10,13 @@ export const Score = ()=>{
     const maxScore = localStorage.getItem('2048maxScore')
 
     useEffect(()=>{
+        if(!localStorage.getItem('2048score')){
+            localStorage.setItem('2048score', context.score)
+        }
+
+        localStorage.setItem('2048score', context.score)
+
+
         let locSt = parseInt(localStorage.getItem('2048maxScore'))
                 if(!locSt){
                     localStorage.setItem('2048maxScore', context.score)
