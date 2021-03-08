@@ -12,15 +12,43 @@ function Rnd() {
 
 export const GameProvider = ({children}) => {
 
+    const [score, setScore] = useState(0)
+    const [gameOver, setGameOver] = useState(false)
+
+    //
+    const initialField = [
+        [Rnd(),Rnd(),Rnd(),Rnd()],
+        [Rnd(),Rnd(),Rnd(),Rnd()],
+        [Rnd(),Rnd(),Rnd(),Rnd()],
+        [Rnd(),Rnd(),Rnd(),Rnd()]  ]
+
+  //   const initialField = [
+  //       [8192,8192,8192,8192],
+  //       [8192,8192,8192,8192],        [8192,8192,8192,8192],
+  //       [8192,8192,8192,8192],
+  //
+  // ]
 
     const [gameField, setGameField] = useState(
-        [
-            [Rnd(),Rnd(),Rnd(),Rnd()],
-            [Rnd(),Rnd(),Rnd(),Rnd()],
-            [Rnd(),Rnd(),Rnd(),Rnd()],
-            [Rnd(),Rnd(),Rnd(),Rnd()]  ]
+        initialField
     )
 
+    useEffect(()=>{
+        if(gameOver){
+            let locSt = parseInt(localStorage.getItem('2048maxScore'))
+            if(!locSt){
+                localStorage.setItem('2048maxScore', score)
+            }
+        if(locSt<score){
+            localStorage.setItem('2048maxScore', score)
+        }
+
+
+console.log(locSt)
+
+           // localStorage.setItem('maxScore', score)
+        }
+    }, [gameOver])
 
 
 
@@ -28,6 +56,10 @@ export const GameProvider = ({children}) => {
     return(        <GameContext.Provider value={{
 
         gameField,setGameField,
+        score, setScore,
+        gameOver, setGameOver,
+        initialField
+
 
     }}>
         {children}

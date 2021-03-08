@@ -4,6 +4,7 @@ import {GameProvider} from "./GameContext";
 import React from "react";
 import {Game} from "./components/Game";
 
+
 function App() {
   return (
       <GameProvider>
